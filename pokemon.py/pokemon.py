@@ -5,7 +5,7 @@ import os
 res = requests.get("http://pokeapi.co/api/v2/pokemon/pikachu/")
 body = json.loads(res.content)
 name = body["name"]
-id = body["id"]
+pokemon_id = body["id"]
 type = body["types"][0]["type"]["name"]
 
 key = os.environ.get("GIPHY_KEY")
@@ -14,8 +14,10 @@ path = '/v1/gifs/search'
 
 url = (f"{root}{path}?api_key={key}&q=pikachu&rating=g")
 giphy_res = requests.get(url)
-body = json.loads(giphy_res.content)
-gif_url = body['data'][0]['url']
+gif_body = json.loads(giphy_res.content)
+gif_url = gif_body['data'][0]['images']['fixed_height_still']['url']
+
+
 print(gif_url)
 
 
